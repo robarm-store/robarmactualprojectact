@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="MsAz Group">
+    <title>RobArm</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <link rel="icon" type="image/png" href="RobArmLogo.png">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+        img {
+            width: 150px;
+            height: auto;
+        }
+        h2 {
+            color: #333;
+        }
+        a {
+            display: block;
+            text-decoration: none;
+            color: #007BFF;
+            margin: 5px 0;
+            font-weight: 700;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="RobArmLogo.png">
+        <h2>RobArm Market</h2>
+        <a href="./market/jollyfootball.html">JF Cards</a>
+        <a href="./market/squishy.html">"Controller" Squishy</a>
+        <a href="./market/limited.html">Limited</a>
+
+        <h2>RobArm Beverages</h2>
+        <a href="./beverages/laimonfresh.html">Laimon Fresh</a>
+        <a href="./beverages/sale">Sale</a>
+        <a href="./beverages/lemonades">Lemonades</a>
+
+        <br>
+        <button class="button" onclick="contactUs()">Contact Us</button><br><br>
+        <a href="./cart.html">To Cart</a>
+    </div>
+    <script>
+        function contactUs(){
+            alert('Contact us on robarm.info@gmail.com or +37491956789 (WhatsApp)');
+        }
+    </script>
+</body>
+</html>
