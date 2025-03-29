@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="MsAz Group">
+    <title>Order | RobArm</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <link rel="icon" type="image/png" href="RobArmLogo.png">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        img {
+            width: 180px;
+            height: 180px;
+        }
+
+        h1 {
+            font-size: 28px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .order-list {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .order-summary {
+            margin-top: 30px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        #confirmation {
+            color: green;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="../RobArmLogo.png" width="180" height="180">
+        <h2>Place Your Order</h2>
+
+        <form id="order-form">
+            <div class="order-list" id="cart-items">
+                <!-- Cart items will be dynamically inserted here -->
+            </div>
+            <button type="submit">Submit Order</button><br><br>
+            <a href="./index.html">Go Back</a>
+        </form>
+
+        <div id="order-summary" class="order-summary"></div>
+        <div id="confirmation"></div>
+    </div>
+
+    <script>
+        // Get the cart from localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Get the cart items container element
+        const cartItemsContainer = document.getElementById('cart-items');
+        const orderSummary = document.getElementById('order-summary');
+        const confirmation = document.getElementById('confirmation');
+
+        // If there are no items in the cart
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<p>Your cart is empty. Please add items to your cart.</p>';
+        } else {
+            // Loop through the cart and create checkboxes for each item
+            cart.forEach(item => {
+                const label = document.createElement('label');
+                label.innerHTML = `
+                    <input type="checkbox" name=${item}checked> ${item}
+                `;
+                cartItemsContainer.appendChild(label);
+            });
+        }
+
+        // Handle form submission
+        document.getElementById('order-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Collect selected items (even though all items are checked by default)
+            let selectedItems = [];
+            let checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+
+            checkboxes.forEach(function (checkbox) {
+                selectedItems.push(checkbox.parentNode.innerText.trim());
+            });
+
+            // Display order summary
+            if (selectedItems.length > 0) {
+                orderSummary.innerHTML = `<h3>Your Order:</h3><ul>`;
+                selectedItems.forEach(function (item) {
+                    orderSummary.innerHTML += `<li>${item}</li>`;
+                });
+                orderSummary.innerHTML += `</ul>`;
+
+                confirmation.innerHTML = 'Your order has been submitted successfully!';
+                confirmation.style.color = 'green';
+            } else {
+                orderSummary.innerHTML = '';
+                confirmation.innerHTML = 'Please select at least one product.';
+                confirmation.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+
+</html>
