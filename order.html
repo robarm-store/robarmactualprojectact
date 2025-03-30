@@ -16,6 +16,7 @@
             margin: 0;
             padding: 0;
         }
+
         .container {
             margin: 50px auto;
             background: white;
@@ -24,24 +25,39 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             max-width: 600px;
         }
+
         img {
             width: 180px;
             height: 180px;
         }
+
         h1 {
             font-size: 28px;
         }
+
         h2 {
             color: #333;
         }
+
         .order-list {
             text-align: left;
             margin-bottom: 20px;
         }
+
         input[type="checkbox"] {
             width: 20px;
             height: 20px;
         }
+
+        input[type="text"], input[type="email"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
         button {
             background-color: #007BFF;
             color: white;
@@ -52,14 +68,17 @@
             border-radius: 5px;
             transition: background 0.3s;
         }
+
         button:hover {
             background-color: #0056b3;
         }
+
         .order-summary {
             margin-top: 30px;
             font-size: 18px;
             color: #333;
         }
+
         #confirmation {
             color: green;
             font-size: 18px;
@@ -74,7 +93,7 @@
         <h2>Place Your Order</h2>
 
         <form id="order-form" action="https://formspree.io/f/xkgjvzlj" method="POST">
-            <input type="email" name="email" placeholder="Your email" required><br><br>
+            <input type="email" name="email" placeholder="Enter your email" required>
             <div class="order-list" id="cart-items"></div>
             <input type="hidden" name="order" id="order-input">
             <button type="submit">Submit Order</button><br><br>
@@ -89,31 +108,39 @@
     <script>
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const cartItemsContainer = document.getElementById('cart-items');
+        const orderSummary = document.getElementById('order-summary');
+        const confirmation = document.getElementById('confirmation');
         const orderInput = document.getElementById('order-input');
 
         if (cart.length === 0) {
-            cartItemsContainer.innerHTML = '<p>Your cart is empty. Please add items.</p>';
+            cartItemsContainer.innerHTML = '<p>Your cart is empty. Please add items to your cart.</p>';
         } else {
             cart.forEach(item => {
                 const label = document.createElement('label');
-                label.innerHTML = `<input type="checkbox" value="${item}" checked> ${item}`;
+                label.innerHTML = `<input type="checkbox" name="items" value="${item}" checked> ${item}`;
                 cartItemsContainer.appendChild(label);
             });
         }
 
         document.getElementById('order-form').addEventListener('submit', function (event) {
+            event.preventDefault();
             let selectedItems = [];
-            document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
-                selectedItems.push(checkbox.value);
-            });
+            let checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
 
-            if (selectedItems.length === 0) {
-                event.preventDefault();
-                alert("Please select at least one product.");
+            checkboxes.forEach(checkbox => selectedItems.push(checkbox.value));
+
+            if (selectedItems.length > 0) {
+                orderInput.value = selectedItems.join(', ');
+                this.submit();
+                confirmation.innerHTML = 'Your order has been submitted successfully!';
+                confirmation.style.color = 'green';
             } else {
-                orderInput.value = selectedItems.join(", ");
+                orderSummary.innerHTML = '';
+                confirmation.innerHTML = 'Please select at least one product.';
+                confirmation.style.color = 'red';
             }
         });
     </script>
 </body>
+
 </html>
