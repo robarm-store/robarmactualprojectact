@@ -16,38 +16,32 @@
             margin: 0;
             padding: 0;
         }
-
         .container {
             margin: 50px auto;
             background: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
         }
-
         img {
             width: 180px;
             height: 180px;
         }
-
         h1 {
             font-size: 28px;
         }
-
         h2 {
             color: #333;
         }
-
         .order-list {
             text-align: left;
             margin-bottom: 20px;
         }
-
         input[type="checkbox"] {
             width: 20px;
             height: 20px;
         }
-
         button {
             background-color: #007BFF;
             color: white;
@@ -58,17 +52,14 @@
             border-radius: 5px;
             transition: background 0.3s;
         }
-
         button:hover {
             background-color: #0056b3;
         }
-
         .order-summary {
             margin-top: 30px;
             font-size: 18px;
             color: #333;
         }
-
         #confirmation {
             color: green;
             font-size: 18px;
@@ -82,11 +73,12 @@
         <img src="../RobArmLogo.png" width="180" height="180">
         <h2>Place Your Order</h2>
 
-        <form id="order-form" action="https://formspree.io/f/xkgjvzlj">
-            <div class="order-list" id="cart-items">
-            </div>
+        <form id="order-form" action="https://formspree.io/f/xkgjvzlj" method="POST">
+            <input type="email" name="email" placeholder="Your email" required><br><br>
+            <div class="order-list" id="cart-items"></div>
+            <input type="hidden" name="order" id="order-input">
             <button type="submit">Submit Order</button><br><br>
-            <a href="./index.html">Go Back</a>
+            <a href='/'>Go Back</a>
         </form>
 
         <div id="order-summary" class="order-summary"></div>
@@ -95,57 +87,33 @@
     </div>
 
     <script>
-        // Get the cart from localStorage
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-        // Get the cart items container element
         const cartItemsContainer = document.getElementById('cart-items');
-        const orderSummary = document.getElementById('order-summary');
-        const confirmation = document.getElementById('confirmation');
+        const orderInput = document.getElementById('order-input');
 
-        // If there are no items in the cart
         if (cart.length === 0) {
-            cartItemsContainer.innerHTML = '<p>Your cart is empty. Please add items to your cart.</p>';
+            cartItemsContainer.innerHTML = '<p>Your cart is empty. Please add items.</p>';
         } else {
-            // Loop through the cart and create checkboxes for each item
             cart.forEach(item => {
                 const label = document.createElement('label');
-                label.innerHTML = `
-                    <input type="checkbox" name=${item}checked> ${item}
-                `;
+                label.innerHTML = `<input type="checkbox" value="${item}" checked> ${item}`;
                 cartItemsContainer.appendChild(label);
             });
         }
 
-        // Handle form submission
         document.getElementById('order-form').addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            // Collect selected items (even though all items are checked by default)
             let selectedItems = [];
-            let checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-
-            checkboxes.forEach(function (checkbox) {
-                selectedItems.push(checkbox.parentNode.innerText.trim());
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+                selectedItems.push(checkbox.value);
             });
 
-            // Display order summary
-            if (selectedItems.length > 0) {
-                orderSummary.innerHTML = `<h3>Your Order:</h3><ul>`;
-                selectedItems.forEach(function (item) {
-                    orderSummary.innerHTML += `<li>${item}</li>`;
-                });
-                orderSummary.innerHTML += `</ul>`;
-
-                confirmation.innerHTML = 'Your order has been submitted successfully!';
-                confirmation.style.color = 'green';
+            if (selectedItems.length === 0) {
+                event.preventDefault();
+                alert("Please select at least one product.");
             } else {
-                orderSummary.innerHTML = '';
-                confirmation.innerHTML = 'Please select at least one product.';
-                confirmation.style.color = 'red';
+                orderInput.value = selectedItems.join(", ");
             }
         });
     </script>
 </body>
-
 </html>
