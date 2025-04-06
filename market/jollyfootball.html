@@ -63,77 +63,8 @@
                 <a href="./jf/comic.html">Comics</a>
                 <a href="./jf/comedy.html">Comedy</a>
             </nav>
+            <br><a href="../cart.html">To Cart</a>
+            <br><a href="../index.html">To Shop</a>
         </div>
-        <script>
-        function addToCart(item) {
-            console.log("addToCart function called!");
-
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const p = document.getElementById('p');
-
-            console.log("Cart before:", cart);
-            console.log("Item to add:", item);
-            console.log("Selected <p> element:", p);
-
-            if (!p) {
-                console.error(" <p> element not found!");
-                return;
-            }
-
-            cart.push(item);
-            localStorage.setItem('cart', JSON.stringify(cart));
-
-            p.textContent = 'Added to cart successfully';
-        }
-
-        function check() {
-            const input = document.getElementById('input').value;
-
-            // Check if input matches '222' or is an empty string multiple times
-            if (input === '222' || input === '' || input === '' || input === '' || input === '' || input === '' || input === '' || input === '' || input === '' || input === '' || input === '' || input === '') {
-                addToCart(`JF Card ${input} - 250 dr.`);
-            } else {
-                const pp = document.getElementById('pp');
-                pp.textContent = 'Unsuccessful. The card either doesn\'t exist or it is sold out.';
-            }
-        }
-    </script>
     </body>
 </html>
-
-    
-    <script>
-        function addToCart(item) {
-            console.log("addToCart function called!");
-
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const p = document.getElementById('p');
-
-            console.log("Cart before:", cart);
-            console.log("Item to add:", item);
-            console.log("Selected <p> element:", p);
-
-            if (!p) {
-                console.error(" <p> element not found!");
-                return;
-            }
-
-            cart.push(item);
-            localStorage.setItem('cart', JSON.stringify(cart));
-
-            p.textContent = 'Added to cart successfully';
-        }
-
-        function check() {
-            const input = document.getElementById('input').value;
-
-            // Check if input matches '222' or is an empty string multiple times
-            if (input === '222' || input === '' || input === '' || input === '' || input === '' || input === '' || input === '' || input === '' || input === '' || input === '' || input === '' || input === '') {
-                addToCart(`JF Card ${input} - 250 dr.`);
-            } else {
-                const pp = document.getElementById('pp');
-                pp.textContent = 'Unsuccessful. The card either doesn\'t exist or it is sold out.';
-            }
-        }
-    </script>
-
