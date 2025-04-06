@@ -97,10 +97,11 @@
         <h2>Market</h2>
         <br>
         <h2 class="color">"Controller" | Squishy</h2>
-        <img src="CSRA.png" width="346" height="256"><br>
-        <button type="button" onclick="addToCart('Squishy - 790 dr.')">Add to cart - 790 dr.</button><br>
+        <img src="CSRA.png" width="300" height="256"><br>
+        <button type="button" onclick="addToCart('Squishy - 390 dr.')">Add to cart - 390 dr.</button><br>
         <p id="p"></p><br>
-        <a href="../cart.html">To Cart</a>
+        <a href="../cart.html">To Cart</a><br>
+        <a href="../index.html">To Shop</a>
     </div>
     <script>
         function addToCart(item) {
@@ -121,7 +122,7 @@
             cart.push(item);
             localStorage.setItem('cart', JSON.stringify(cart));
             
-            p.textContent = 'Added to cart successfully';
+            p.textContent = 'Added to cart successfully!';
         }
     </script>
 </body>
