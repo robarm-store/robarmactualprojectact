@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>RobArm Market - JF Cards</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <link rel="icon" type="image/png" href="../RobArmLogo.png">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+      a{
+        margin: 30px 0;
+      }
+        img {
+            width: 150px;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+        }
+        .card-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="../RobArmLogo.png" width="180" height="180">
+        <h2>MOMENTS Jolly Football</h2>
+        
+        <div class="card-item">
+            <label>
+                <input type="checkbox" value="JF Card 1 - 250dr" class="card-checkbox">Baggio Penalty Miss - Card 1942 - 450dr.
+            </label>
+            <img src="jfcard1942.png">
+        </div>
+        
+        <div class="card-item">
+            <label>
+                <input type="checkbox" value="JF Card 1942 - 450dr" class="card-checkbox">Ibra + Pep + Jose - Card 1775 - 400dr.
+            </label>
+            <img src="jfcard1775.png">
+        </div>
+        
+        <button onclick="addToCart()">Add to Cart</button>
+        <br><p id="message" style="color:green;"></p>
+        <br><p>To add 2 or more of the same item to cart, press "Add To Cart" the amount of wanted items to cart while selecting the item you want to add to cart</p><br><br>
+        <a href=".../cart.html">To Cart</a>
+    <a href=".../index.html">To Shop</a><br><br><br><br>
+    </div>
+    <script>
+        function addToCart() {
+            let selectedItems = [];
+            document.querySelectorAll('.card-checkbox:checked').forEach(checkbox => {
+                selectedItems.push(checkbox.value);
+            });
+            
+            if (selectedItems.length > 0) {
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const message = document.getElementById('message');
+                cart.push(...selectedItems);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                message.textContent = 'Added to cart successfully!';
+            } else {
+                alert('Please select at least one item.');
+            }
+        }
+    </script>
+</body>
+</html>
