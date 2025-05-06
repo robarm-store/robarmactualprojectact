@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="MsAz Group">
-    <title>RobArm</title>
+    <title>&apos;Controller&apos; Squishy | RobArm Market</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
     <link rel="icon" type="image/png" href="RobArmLogo.png">
     <style>
@@ -98,17 +98,17 @@
         <br>
         <h2 class="color">"Controller" | Squishy</h2>
         <img src="CSRA.png" width="300" height="256"><br>
-        <button type="button" onclick="addToCart('Squishy - 390 dr.')">Add to cart - 390 dr.</button><br>
+        <button type="button" onclick="addToCart('\'Controller\' Squishy - 390 dr.')">Add to cart - 390 dr.</button><br>
         <p id="p"></p><br>
         <a href="../cart.html">To Cart</a><br>
         <a href="../index.html">To Shop</a>
     </div>
     <script>
         function addToCart(item) {
-            console.log("addToCart function called!"); // ✅ Check if the function is running
+            console.log("addToCart function called!"); 
 
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            let p = document.getElementById('p'); // ✅ Make sure we're selecting the correct <p>
+            let p = document.getElementById('p'); 
 
             console.log("Cart before:", cart);
             console.log("Item to add:", item);
